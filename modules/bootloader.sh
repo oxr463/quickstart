@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# bootloader module for quickstart
+set -eu
 
 map_device_to_grub_device() {
   local device=$1
