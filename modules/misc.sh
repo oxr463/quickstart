@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# miscellaneous module for quickstart
+set -eu
 
 get_arch() {
   ${linux32} uname -m | sed -e 's:i[3-6]86:x86:' -e 's:x86_64:amd64:' -e 's:parisc:hppa:'
