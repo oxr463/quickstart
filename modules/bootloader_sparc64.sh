@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# architecture-specific bootloader module for sparc64
+set -eu
 
 sanity_check_config_bootloader() {
   if [ -z "${bootloader}" ]; then
