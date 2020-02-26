@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# portage module for quickstart
+set -eu
 
 run_emerge() {
   pkgs=$1
