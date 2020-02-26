@@ -16,15 +16,15 @@ server_init() {
 }
 
 server_send_request() {
-  local command=$1
-  local args=$2
+  command=$1
+  args=$2
 
   fetch "quickstart:///${command}?${args}" "/tmp/server_response"
   cat /tmp/server_response
 }
 
 server_get_profile() {
-  local profile_uri=$(server_send_request "get_profile_path" "mac=${mac_address}")
+  profile_uri=$(server_send_request "get_profile_path" "mac=${mac_address}")
   if [ -z "${profile_uri}" ]; then
     warn "error in response from server...could not retrieve profile URI"
     return 1
