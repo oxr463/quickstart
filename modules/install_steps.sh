@@ -18,16 +18,16 @@ run_pre_install_script() {
 partition() {
   for device in $(set | grep '^partitions_' | cut -d= -f1 | sed -e 's:^partitions_::'); do
     debug partition "device is ${device}"
-    local device_temp="partitions_${device}"
-    local device="/dev/$(echo "${device}" | sed  -e 's:_:/:g')"
-    local device_size="$(get_device_size_in_mb ${device})"
+    device_temp="partitions_${device}"
+    device="/dev/$(echo "${device}" | sed  -e 's:_:/:g')"
+    device_size="$(get_device_size_in_mb ${device})"
     create_disklabel ${device} || die "could not create disklabel for device ${device}"
     for partition in $(eval echo \${${device_temp}}); do
       debug partition "partition is ${partition}"
-      local minor=$(echo ${partition} | cut -d: -f1)
-      local type=$(echo ${partition} | cut -d: -f2)
-      local size=$(echo ${partition} | cut -d: -f3)
-      local devnode=$(format_devnode "${device}" "${minor}")
+      minor=$(echo ${partition} | cut -d: -f1)
+      type=$(echo ${partition} | cut -d: -f2)
+      size=$(echo ${partition} | cut -d: -f3)
+      devnode=$(format_devnode "${device}" "${minor}")
       debug partition "devnode is ${devnode}"
       if [ "${type}" = "extended" ]; then
         newsize="${device_size}"
@@ -44,9 +44,9 @@ partition() {
 
 setup_md_raid() {
   for array in $(set | grep '^mdraid_' | cut -d= -f1 | sed -e 's:^mdraid_::' | sort); do
-    local array_temp="mdraid_${array}"
-    local arrayopts=$(eval echo \${${array_temp}})
-    local arraynum=$(echo ${array} | sed -e 's:^md::')
+    array_temp="mdraid_${array}"
+    arrayopts=$(eval echo \${${array_temp}})
+    arraynum=$(echo ${array} | sed -e 's:^md::')
     if [ ! -e "/dev/md${arraynum}" ]; then
       spawn "mknod /dev/md${arraynum} b 9 ${arraynum}" || die "could not create device node for mdraid array ${array}"
     fi
@@ -56,26 +56,26 @@ setup_md_raid() {
 
 setup_lvm() {
   for volgroup in $(set | grep '^lvm_volgroup_' | cut -d= -f1 | sed -e 's:^lvm_volgroup_::' | sort); do
-    local volgroup_temp="lvm_volgroup_${volgroup}"
-    local volgroup_devices="$(eval echo \${${volgroup_temp}})"
+    volgroup_temp="lvm_volgroup_${volgroup}"
+    volgroup_devices="$(eval echo \${${volgroup_temp}})"
     for device in ${volgroup_devices}; do
       spawn "pvcreate -ffy ${device}" || die "could not run 'pvcreate' on ${device}"
     done
     spawn "vgcreate ${volgroup} ${volgroup_devices}" || die "could not create volume group '${volgroup}' from devices: ${volgroup_devices}"
   done
   for logvol in ${lvm_logvols}; do
-    local volgroup="$(echo ${logvol} | cut -d '|' -f1)"
-    local size="$(echo ${logvol} | cut -d '|' -f2)"
-    local name="$(echo ${logvol} | cut -d '|' -f3)"
+    volgroup="$(echo ${logvol} | cut -d '|' -f1)"
+    size="$(echo ${logvol} | cut -d '|' -f2)"
+    name="$(echo ${logvol} | cut -d '|' -f3)"
     spawn "lvcreate -L${size} -n${name} ${volgroup}" || die "could not create logical volume '${name}' with size ${size} in volume group '${volgroup}'"
   done
 }
 
 format_devices() {
   for device in ${format}; do
-    local devnode=$(echo ${device} | cut -d: -f1)
-    local fs=$(echo ${device} | cut -d: -f2)
-    local formatcmd=""
+    devnode=$(echo ${device} | cut -d: -f1)
+    fs=$(echo ${device} | cut -d: -f2)
+    formatcmd=""
     case "${fs}" in
       swap)
         formatcmd="mkswap ${devnode}"
@@ -103,11 +103,10 @@ mount_local_partitions() {
     rm /tmp/install.mount /tmp/install.umount /tmp/install.swapoff 2>/dev/null
     for mount in ${localmounts}; do
       debug mount_local_partitions "mount is ${mount}"
-      local devnode=$(echo ${mount} | cut -d ':' -f1)
-      local type=$(echo ${mount} | cut -d ':' -f2)
-      local mountpoint=$(echo ${mount} | cut -d ':' -f3)
-      local mountopts=$(echo ${mount} | cut -d ':' -f4)
-#      [ -n "${type}" ] && type="-t ${type}"
+      devnode=$(echo ${mount} | cut -d ':' -f1)
+      type=$(echo ${mount} | cut -d ':' -f2)
+      mountpoint=$(echo ${mount} | cut -d ':' -f3)
+      mountopts=$(echo ${mount} | cut -d ':' -f4)
       [ -n "${mountopts}" ] && mountopts="-o ${mountopts}"
       case "${type}" in
         swap)
@@ -130,10 +129,10 @@ mount_local_partitions() {
 mount_network_shares() {
   if [ -n "${netmounts}" ]; then
     for mount in ${netmounts}; do
-      local export=$(echo ${mount} | cut -d '|' -f1)
-      local type=$(echo ${mount} | cut -d '|' -f2)
-      local mountpoint=$(echo ${mount} | cut -d '|' -f3)
-      local mountopts=$(echo ${mount} | cut -d '|' -f4)
+      export=$(echo ${mount} | cut -d '|' -f1)
+      type=$(echo ${mount} | cut -d '|' -f2)
+      mountpoint=$(echo ${mount} | cut -d '|' -f3)
+      mountopts=$(echo ${mount} | cut -d '|' -f4)
       [ -n "${mountopts}" ] && mountopts="-o ${mountopts}"
       case "${type}" in
         nfs)
@@ -242,24 +241,24 @@ setup_fstab() {
   echo -e "none\t/proc\tproc\tdefaults\t0 0\nnone\t/dev/shm\ttmpfs\tdefaults\t0 0" > ${chroot_dir}/etc/fstab
   for mount in ${localmounts}; do
     debug setup_fstab "mount is ${mount}"
-    local devnode=$(echo ${mount} | cut -d ':' -f1)
-    local type=$(echo ${mount} | cut -d ':' -f2)
-    local mountpoint=$(echo ${mount} | cut -d ':' -f3)
-    local mountopts=$(echo ${mount} | cut -d ':' -f4)
+    devnode=$(echo ${mount} | cut -d ':' -f1)
+    type=$(echo ${mount} | cut -d ':' -f2)
+    mountpoint=$(echo ${mount} | cut -d ':' -f3)
+    mountopts=$(echo ${mount} | cut -d ':' -f4)
     if [ "${mountpoint}" == "/" ]; then
-      local dump_pass="0 1"
+      dump_pass="0 1"
     elif [ "${mountpoint}" == "/boot" -o "${mountpoint}" == "/boot/" ]; then
-      local dump_pass="1 2"
+      dump_pass="1 2"
     else
-      local dump_pass="0 0"
+      dump_pass="0 0"
     fi
     echo -e "${devnode}\t${mountpoint}\t${type}\t${mountopts}\t${dump_pass}" >> ${chroot_dir}/etc/fstab
   done
   for mount in ${netmounts}; do
-    local export=$(echo ${mount} | cut -d '|' -f1)
-    local type=$(echo ${mount} | cut -d '|' -f2)
-    local mountpoint=$(echo ${mount} | cut -d '|' -f3)
-    local mountopts=$(echo ${mount} | cut -d '|' -f4)
+    export=$(echo ${mount} | cut -d '|' -f1)
+    type=$(echo ${mount} | cut -d '|' -f2)
+    mountpoint=$(echo ${mount} | cut -d '|' -f3)
+    mountopts=$(echo ${mount} | cut -d '|' -f4)
     echo -e "${export}\t${mountpoint}\t${type}\t${mountopts}\t0 0" >> ${chroot_dir}/etc/fstab
   done
 }
@@ -267,9 +266,9 @@ setup_fstab() {
 setup_network_post() {
   if [ -n "${net_devices}" ]; then
     for net_device in ${net_devices}; do
-      local device="$(echo ${net_device} | cut -d '|' -f1)"
-      local ipdhcp="$(echo ${net_device} | cut -d '|' -f2)"
-      local gateway="$(echo ${net_device} | cut -d '|' -f3)"
+      device="$(echo ${net_device} | cut -d '|' -f1)"
+      ipdhcp="$(echo ${net_device} | cut -d '|' -f2)"
+      gateway="$(echo ${net_device} | cut -d '|' -f3)"
       if [ "${ipdhcp}" = "dhcp" ] || [ "${ipdhcp}" = "DHCP" ]; then
         echo "config_${device}=( \"dhcp\" )" >> ${chroot_dir}/etc/conf.d/net
       elif [ "${ipdhcp}" = "current" ]; then
@@ -299,8 +298,8 @@ setup_network_post() {
 add_and_remove_services() {
   if [ -n "${services_add}" ]; then
     for service_add in ${services_add}; do
-      local service="$(echo ${service_add} | cut -d '|' -f1)"
-      local runlevel="$(echo ${service_add} | cut -d '|' -f2)"
+      service="$(echo ${service_add} | cut -d '|' -f1)"
+      runlevel="$(echo ${service_add} | cut -d '|' -f2)"
       spawn_chroot "rc-update add ${service} ${runlevel}" || die "could not add service ${service} to the ${runlevel} runlevel"
     done
   fi
