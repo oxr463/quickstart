@@ -22,12 +22,12 @@ mountfs /dev/hda3 ext3 / noatime
 net eth0 dhcp
 
 post_install_portage_tree() {
-  cat > ${chroot_dir}/etc/make.conf <<EOF
+  cat > "${chroot_dir}/etc/make.conf" <<EOF
 CHOST="i686-pc-linux-gnu"
 CFLAGS="-O2 -march=athlon-xp -pipe"
 CXXFLAGS="\${CFLAGS}"
 USE="-X -gtk -gnome -kde -qt"
 EOF
 
-  echo "portdbapi.auxdbmodule = cache.metadata_overlay.database" > ${chroot_dir}/etc/portage/modules
+  echo "portdbapi.auxdbmodule = cache.metadata_overlay.database" > "${chroot_dir}/etc/portage/modules"
 }
