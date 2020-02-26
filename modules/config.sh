@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# config module for quickstart
+set -eu
 
 install_mode() {
   local mode=$1
