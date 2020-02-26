@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# stepcontrol module for quickstart
+set -eu
 
 isafunc() {
   local func=$1
