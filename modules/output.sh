@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# output module for quickstart
+set -eu
 
 GOOD='\033[32;01m'
 WARN='\033[33;01m'
