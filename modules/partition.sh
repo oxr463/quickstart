@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# partition module for quickstart
+set -eu
 
 get_device_size_in_mb() {
   local device=$1
