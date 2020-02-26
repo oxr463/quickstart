@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# server module for quickstart
+set -eu
 
 server_init() {
   if [ -n "$(echo ${server} | grep :)" ]; then
