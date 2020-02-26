@@ -25,9 +25,9 @@ get_mac_address() {
 }
 
 unpack_tarball() {
-  local file=$1
-  local dest=$2
-  local preserve=$3
+  file=$1
+  dest=$2
+  preserve=$3
 
   tar_flags="xv"
 
