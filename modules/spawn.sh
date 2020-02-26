@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# spawn module for quickstart
+set -eu
 
 chroot_dir=/mnt/gentoo
 output_logfile=/tmp/installoutput.log
