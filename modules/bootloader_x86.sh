@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# architecture-specific bootloader module for x86
+set -eu
 
 sanity_check_config_bootloader() {
   if [ -z "${bootloader}" ]; then
