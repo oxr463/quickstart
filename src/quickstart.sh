@@ -1,5 +1,6 @@
 #!/bin/sh
-# $Id$
+# quickstart cli
+set -eu
 
 # Constants
 VERSION=foon
