@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# install module for quickstart
+set -eu
 
 run_pre_install_script() {
   if [ -n "${pre_install_script_uri}" ]; then
