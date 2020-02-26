@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# architecture-specific partition module for sparc64
+set -eu
 
 sanity_check_config_partition() {
   for device in $(set | grep '^partitions_' | cut -d= -f1 | sed -e 's:^partitions_::' -e 's:_:/:g'); do
