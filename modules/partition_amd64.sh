@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# architecture-specific partition module for amd64
+set -eu
 
 import partition_x86
 
