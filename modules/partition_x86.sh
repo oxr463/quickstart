@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# architecture-specific partition module for x86
+set -eu
 
 sanity_check_config_partition() {
   warn "Sanity checking partition config for x86"
