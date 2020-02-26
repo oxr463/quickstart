@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# profile example for quickstart
+set -eu
 
 stage_uri http://192.168.0.12/gentoo/stage3-i686-2006.1.tar.bz2
 tree_type snapshot http://192.168.0.12/gentoo/portage-20061216.tar.bz2
@@ -18,8 +20,6 @@ mountfs /dev/hda2 swap
 mountfs /dev/hda3 ext3 / noatime
 
 net eth0 dhcp
-
-#netmount 192.168.0.12:/usr/portage nfs /usr/portage ro
 
 post_install_portage_tree() {
   cat > ${chroot_dir}/etc/make.conf <<EOF
