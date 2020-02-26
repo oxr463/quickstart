@@ -3,7 +3,7 @@
 set -eu
 
 isafunc() {
-  local func=$1
+  func=$1
 
   if [ -n "$(LC_ALL=C type ${func} 2>/dev/null | grep "function")" ]; then
     return 0
@@ -13,10 +13,10 @@ isafunc() {
 }
 
 runstep() {
-  local func=$1
-  local descr=$2
+  func=$1
+  descr=$2
 
-  local skipfunc=$(eval $(echo echo "\${skip_${func}}"))
+  skipfunc=$(eval $(echo echo "\${skip_${func}}"))
   if [ "${skipfunc}" != "1" ]; then
     notify "${descr}"
     if [ -n "${server}" ]; then
