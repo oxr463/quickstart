@@ -7,7 +7,7 @@ sanity_check_config_partition() {
 }
 
 create_disklabel() {
-  local device=$1
+  device=$1
 
   debug create_disklabel "creating new msdos disklabel"
   fdisk_command ${device} "o"
@@ -15,13 +15,13 @@ create_disklabel() {
 }
 
 get_num_primary() {
-  local device=$1
+  device=$1
 
-  local primary_count=0
-  local device_temp="partitions_$(echo ${device} sed -e 's:^.\+/::')"
+  primary_count=0
+  device_temp="partitions_$(echo ${device} sed -e 's:^.\+/::')"
   for partition in $(eval echo \${${device_temp}}); do
     debug get_num_primary "partition is ${partition}"
-    local minor=$(echo ${partition} | cut -d: -f1)
+    minor=$(echo ${partition} | cut -d: -f1)
     if [ "${minor}" -lt "5" ]; then
       primary_count=$(expr ${primary_count} + 1)
       debug get_num_primary "primary_count is ${primary_count}"
@@ -31,10 +31,10 @@ get_num_primary() {
 }
 
 add_partition() {
-  local device=$1
-  local minor=$2
-  local size=$3
-  local type=$4
+  device=$1
+  minor=$2
+  size=$3
+  type=$4
 
   if [ "${type}" = "extended" ]; then
     # Extended partition
