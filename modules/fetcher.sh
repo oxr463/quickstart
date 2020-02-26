@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# fetcher module for quickstart
+set -eu
 
 get_filename_from_uri() {
   local uri=$1
