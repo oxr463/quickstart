@@ -1,4 +1,6 @@
-# $Id$
+#!/bin/sh
+# architecture-specific partition module for hppa
+set -eu
 
 import partition_x86
 
