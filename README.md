@@ -53,7 +53,17 @@ Arguments:
 
 Based on the original [Quickstart][quickstart] by Andrew Gaffney.
 
+The [original file](https://commons.wikimedia.org/wiki/File:Font_Q.svg)
+used for the logo is attributed to
+[Iwan Novirion](https://en.wikipedia.org/wiki/id:User:Iwan_Novirion).
+
 ## License
+
+### Logo
+
+SPDX-License-Identifier: [CC-BY-SA-3.0](https://spdx.org/licenses/CC-BY-SA-3.0.html)
+
+### Source Code
 
 SPDX-License-Identifier: [GPL-2.0-only][GPL-2.0-only]
 
@@ -76,4 +86,3 @@ See [COPYING](COPYING) file for copyright and license details.
 - [OpenBSD autoinstall(8)](https://man.openbsd.org/autoinstall)
 
 - [Canonical curtin](https://github.com/canonical/curtin)
-
