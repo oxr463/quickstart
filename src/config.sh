@@ -257,9 +257,17 @@ verbose() {
 sanity_check_config() {
   fatal=0
 
+  default_tz="UTC"
+  default_kernel="gentoo-sources"
+  default_log="syslog-ng"
+  default_cron="cronie"
+
   debug sanity_check_config "$(set | grep '^[a-z]')"
 
-  if [ -n "${install_mode}" ] && [ "${install_mode}" != "normal" ] && [ "${install_mode}" != "chroot" ] && [ "${install_mode}" != "stage4" ]; then
+  if [ -n "${install_mode}" ] && \
+     [ "${install_mode}" != "normal" ] && \
+     [ "${install_mode}" != "chroot" ] && \
+     [ "${install_mode}" != "stage4" ]; then
     error "install_mode must be 'normal', 'chroot', or 'stage4'"
     fatal=1
   fi
@@ -284,18 +292,17 @@ sanity_check_config() {
     fatal=1
   fi
   if [ -z "${timezone}" ]; then
-    warn "timezone not set...assuming UTC"
-    timezone=UTC
+    warn "timezone not set...assuming ${default_tz}"
+    timezone="$default_tz}"
   fi
   if [ -z "${kernel_sources}" ]; then
-    warn "kernel_sources not set...assuming gentoo-sources"
-    kernel_sources="gentoo-sources"
+    warn "kernel_sources not set...assuming ${default_kernel}"
+    kernel_sources="${default_kernel}"
   fi
   if [ -z "${logging_daemon}" ]; then
-    warn "logging_daemon not set...assuming syslog-ng"
-    logging_daemon="syslog-ng"
+    warn "logging_daemon not set...assuming ${default_log}"
+    logging_daemon="${default_log}"
   fi
-  default_cron="cronie"
   if [ -z "${cron_daemon}" ]; then
     warn "cron_daemon not set...assuming ${default_cron}"
     cron_daemon="${default_cron}"
