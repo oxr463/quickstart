@@ -295,9 +295,10 @@ sanity_check_config() {
     warn "logging_daemon not set...assuming syslog-ng"
     logging_daemon="syslog-ng"
   fi
+  default_cron="cronie"
   if [ -z "${cron_daemon}" ]; then
-    warn "cron_daemon not set...assuming vixie-cron"
-    cron_daemon="vixie-cron"
+    warn "cron_daemon not set...assuming ${default_cron}"
+    cron_daemon="${default_cron}"
   fi
 
   if ! sanity_check_config_partition; then
