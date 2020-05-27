@@ -27,21 +27,19 @@ usage() {
     printf "%s\n" "${msg}"
   fi
   cat <<EOF
-Usage:
-  quickstart [-h|--help] [-d|--debug] [-v|--verbose] [-q|--quiet]
-             [-s|--sanity-check] [--version] <profile>
+Usage: quickstart [option] ... [profile] ...
 
 Options:
-  -h|--help            Show this message and quit
-  -d|--debug           Output debugging messages
-  -q|--quiet           Only output fatal error messages
-  -v|--verbose         Be verbose (show external command output)
-  -s|--sanity-check    Sanity check install profile and exit
-  -c|--client <host>   Act as a client and connect to a quickstartd
-  --version            Print version and exit
+  -h, --help            Show this message and quit
+  -d, --debug           Output debugging messages
+  -q, --quiet           Only output fatal error messages
+  -v, --verbose         Be verbose (show external command output)
+  -s, --sanity-check    Sanity check install profile and exit
+  -c, --client          Act as a client and connect to a quickstartd
+  --version             Print version and exit
 
 Arguments:
-  profile              Path to an install profile
+  profile               Path to an install profile
 EOF
 }
 
