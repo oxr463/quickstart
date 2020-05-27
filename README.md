@@ -22,10 +22,44 @@ installer, just one that works well enough to get the system up and running.
 Therefore, instead of writing a new installer from scratch,
 I have instead decided to give Quickstart another chance.
 
+## Dependencies
+
+- [app-admin/syslog-ng](https://packages.gentoo.org/packages/app-admin/syslog-ng)
+
+- [app-text/pandoc](https://packages.gentoo.org/packages/app-text/pandoc) (optional)
+
+- [dev-util/shellcheck](https://packages.gentoo.org/packages/dev-util/shellcheck) (optional)
+
+- [net-fs/cifs-utils](https://packages.gentoo.org/packages/net-fs/cifs-utils) (optional)
+
+- [net-fs/nfs-utils](https://packages.gentoo.org/packages/net-fs/nfs-utils) (optional)
+
+- [net-fs/samba](https://packages.gentoo.org/packages/net-fs/samba) (optional)
+
+- [sys-boot/grub](https://packages.gentoo.org/packages/sys-boot/grub)
+
+- [sys-fs/dosfstools](https://packages.gentoo.org/packages/sys-fs/dosfstools) (optional)
+
+- [sys-fs/lvm2](https://packages.gentoo.org/packages/sys-fs/lvm2) (optional)
+
+- [sys-fs/mdadm](https://packages.gentoo.org/packages/sys-fs/mdadm) (optional)
+
+- [sys-kernel/genkernel](https://packages.gentoo.org/packages/sys-kernel/genkernel)
+
+- [sys-process/cronie](https://packages.gentoo.org/packages/sys-process/cronie)
+
 ## Installation
 
 ```sh
 make install
+```
+
+### Gentoo
+
+An ebuild can be found in the **[rage-overlay](https://gitlab.com/oxr463/overlay)**.
+
+```sh
+emerge --ask sys-apps/quickstart
 ```
 
 ## Usage
