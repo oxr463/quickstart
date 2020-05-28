@@ -70,7 +70,6 @@ do
       sanitycheck=1
       ;;
     -d|--debug)
-      # shellcheck disable=SC2034
       debug=1
       ;;
     -q|--quiet)
