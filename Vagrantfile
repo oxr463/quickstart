@@ -27,10 +27,13 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.provision "shell", inline: <<-SHELL
-    sudo emerge -nq dev-vcs/git \
-                    net-fs/sshfs # needed for vagrant-sshfs plugin
+    sudo emerge -nq dev-vcs/git
   SHELL
 
-  config.vm.synced_folder ".", "/usr/src/quickstart", type: "sshfs", reverse: false
+  # Disable default synced directory
+  config.vm.synced_folder ".", "/vagrant", disabled: true
+
+  # Synchronize repository directory
+  config.vm.synced_folder ".", "/usr/src/quickstart"
 
 end
