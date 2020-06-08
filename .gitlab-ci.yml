@@ -1,0 +1,7 @@
+services:
+  - docker:dind
+
+build:
+  image: docker:latest
+  script:
+    - docker build -t oxr463/quickstart .
