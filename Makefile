@@ -39,8 +39,7 @@ all: ${PROGRAM_NAME} man
 
 ${PROGRAM_NAME}:
 	@cp ${SRC_DIR}/$@.sh ${BUILD_DIR}/$@
-	@mkdir -p ${BUILD_DIR}/modules
-	@cp ${SRC} ${BUILD_DIR}/modules/
+	@cp -R ${SRC_DIR} ${BUILD_DIR}/modules/
 	@chmod +x ${BUILD_DIR}/${PROGRAM_NAME}
 
 check:
