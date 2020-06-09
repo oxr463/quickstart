@@ -26,14 +26,13 @@ Vagrant.configure("2") do |config|
 
   end
 
-  config.vm.provision "shell", inline: <<-SHELL
-    sudo emerge -nq dev-vcs/git
-  SHELL
-
   # Disable default synced directory
   config.vm.synced_folder ".", "/vagrant", disabled: true
 
   # Synchronize repository directory
   config.vm.synced_folder ".", "/usr/src/quickstart"
+
+  config.vm.provision "shell",
+    inline: "/bin/sh /usr/src/quickstart/.local/share/quickstart/bin/provision.sh"
 
 end
