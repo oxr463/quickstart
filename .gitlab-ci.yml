@@ -3,5 +3,8 @@ services:
 
 build:
   image: docker:latest
+  before_script:
+    - apk update
+    - apk add docker-compose
   script:
-    - docker build -t oxr463/quickstart .
+    - docker-compose build
