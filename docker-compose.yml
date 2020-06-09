@@ -1,0 +1,8 @@
+version: "3"
+services:
+  quickstart:
+    image: oxr463/quickstart
+    build: .
+    volumes:
+      - .:/usr/src/quickstart
+      - .local/etc:/etc

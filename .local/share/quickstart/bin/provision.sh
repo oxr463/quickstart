@@ -2,6 +2,9 @@
 # SPDX-License-Identifier: GPL-2.0-only
 set -eu
 
+# Copy portage configuration
+cp -R /usr/src/quickstart/.local/etc/portage/* /etc/portage/
+
 # Install dependencies
 emerge -ng @quickstart-dependencies
 
