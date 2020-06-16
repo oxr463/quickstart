@@ -1,8 +1,13 @@
-version: "3"
+version: "3.7"
 services:
   quickstart:
     image: oxr463/quickstart
-    build: .
+    build:
+      context: .
+      cache_from:
+        - gentoo/portage:latest
+        - gentoo/stage3-amd64:latest
+        - registry.gitlab.com/oxr463/quickstart
     volumes:
       - .:/usr/src/quickstart
       - .local/etc:/etc
