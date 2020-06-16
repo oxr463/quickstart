@@ -39,32 +39,32 @@ fetch_quickstart() {
   localfile=$2
 
   realurl="http://${server_host}:${server_port}/$(get_path_from_uri "${uri}")"
-  fetch_http_https_ftp "${realurl}" "${localfile}"
+  fetch_wget "${realurl}" "${localfile}"
 }
 
 fetch_http() {
-  debug fetch_http "calling fetch_http_https_ftp() to do real work"
-  fetch_http_https_ftp "$@"
+  debug fetch_http "calling fetch_wget() to do real work"
+  fetch_wget "$@"
 }
 
 fetch_https() {
-  debug fetch_http "calling fetch_http_https_ftp() to do real work"
-  fetch_http_https_ftp "$@"
+  debug fetch_http "calling fetch_wget() to do real work"
+  fetch_wget "$@"
 }
 
 fetch_ftp() {
-  debug fetch_http "calling fetch_http_https_ftp() to do real work"
-  fetch_http_https_ftp "$@"
+  debug fetch_http "calling fetch_wget() to do real work"
+  fetch_wget "$@"
 }
 
-fetch_http_https_ftp() {
+fetch_wget() {
   uri=$1
   localfile=$2
 
-  debug fetch_http_https_ftp "Fetching URL ${uri} to ${2}"
+  debug fetch_wget "Fetching URL ${uri} to ${2}"
   spawn "wget -O ${localfile} ${uri}"
   wget_exitcode=$?
-  debug fetch_http_https_ftp "exit code from wget was ${wget_exitcode}"
+  debug fetch_wget "exit code from wget was ${wget_exitcode}"
   return ${wget_exitcode}
 }
 
