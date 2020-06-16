@@ -3,6 +3,7 @@ INSTALL_PROGRAM = ${INSTALL}
 INSTALL_DATA = ${INSTALL} -m 644
 PANDOC = pandoc
 SHELLCHECK = shellcheck
+SHUNIT = shunit2
 
 PROGRAM_NAME = quickstart
 
@@ -14,6 +15,7 @@ SHARE_DIR = ${PREFIX}/share/${PROGRAM_NAME}
 TARGET_DIR = .
 BUILD_DIR = ${TARGET_DIR}
 SRC_DIR = ${TARGET_DIR}/src
+TEST_DIR =${TARGET_DIR}/test
 DOC_DIR = ${TARGET_DIR}/doc
 
 MAN_SRC = ${DOC_DIR}/man/${PROGRAM_NAME}.5.md
@@ -45,6 +47,9 @@ ${PROGRAM_NAME}:
 check:
 	${SHELLCHECK} ${SRC_DIR}/${PROGRAM_NAME}.sh ${SRC}
 
+test:
+	${SHUNIT} ${TEST_DIR}/fetch.sh
+
 install: all
 	${INSTALL_PROGRAM} ${BUILD_DIR}/${PROGRAM_NAME} ${BIN_DIR}
 	@mkdir -p ${MAN_DIR}/man5 ${SHARE_DIR}
@@ -57,3 +62,4 @@ man:
 clean: 
 	@rm -rf ${PROGRAM_NAME} ${PROGRAM_NAME}.5 ${BUILD_DIR}/modules
 
+.PHONY: check test install clean
