@@ -115,6 +115,6 @@ See [COPYING](COPYING) file for copyright and license details.
 
 ## See Also
 
-- [OpenBSD autoinstall(8)](https://man.openbsd.org/autoinstall)
+- [autoinstall](https://man.openbsd.org/autoinstall)
 
-- [Canonical curtin](https://github.com/canonical/curtin)
+- [curtin](https://github.com/canonical/curtin)
